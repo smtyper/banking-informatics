@@ -19,11 +19,11 @@ public static class CreditCalculator
         var periods = (parameters.Months * -1) - 1;
 
         var monthPayment = decimal.Round(parameters.Sum * (monthRate / (1 - DecimalEx.Pow(1 + monthRate, periods))));
-        var overpayment = decimal.Round(monthPayment - parameters.Sum);
+        var overpayment = decimal.Round((monthPayment * parameters.Months) - parameters.Sum);
 
         var paymentCollection = new PaymentCollection
         {
-            Payments = EnumeratePaymentDates(parameters.Date, parameters.Months)
+            Payments = Extensions.EnumeratePaymentDates(parameters.Date, parameters.Months)
                 .Select(date => new Payment { Date = date, BodySum = monthPayment, PercentSum = 0, Sum = monthPayment })
                 .ToArray(),
             Overpayment = overpayment
@@ -36,7 +36,7 @@ public static class CreditCalculator
     {
         var bodyPaymentPart = decimal.Round(parameters.Sum / parameters.Months);
 
-        var payments = EnumeratePaymentDates(parameters.Date, parameters.Months)
+        var payments = Extensions.EnumeratePaymentDates(parameters.Date, parameters.Months)
             .Select((date, index) =>
             {
                 var remainingSum = parameters.Sum - (index * bodyPaymentPart);
@@ -67,17 +67,5 @@ public static class CreditCalculator
         };
 
         return paymentCollection;
-    }
-
-    private static IEnumerable<DateOnly> EnumeratePaymentDates(DateOnly date, int months)
-    {
-        var currentDate = date;
-
-        foreach (var _ in Enumerable.Range(0, months))
-        {
-            currentDate = currentDate.AddMonths(1);
-
-            yield return currentDate;
-        }
     }
 }
