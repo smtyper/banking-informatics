@@ -1,5 +1,6 @@
 ﻿using BankingInformatics.Frontend.Models;
 using BankingInformatics.Frontend.Models.Parameters;
+using DecimalMath;
 
 namespace BankingInformatics.Frontend.Calculators.Credit;
 
@@ -8,8 +9,28 @@ public static class CreditCalculator
     public static PaymentCollection CalculatePayments(CreditParameters parameters) => parameters.PaymentType switch
     {
         PaymentType.Differentiated => CalculateDifferentiatedPayments(parameters),
+        PaymentType.Annuity => CalculateAnnuityPayments(parameters),
         _ => throw new ArgumentOutOfRangeException(nameof(parameters))
     };
+
+    private static PaymentCollection CalculateAnnuityPayments(CreditParameters parameters)
+    {
+        var monthRate = parameters.Percent / (100 * 12);
+        var periods = (parameters.Months * -1) - 1;
+
+        var monthPayment = decimal.Round(parameters.Sum * (monthRate / (1 - DecimalEx.Pow(1 + monthRate, periods))));
+        var overpayment = decimal.Round(monthPayment - parameters.Sum);
+
+        var paymentCollection = new PaymentCollection
+        {
+            Payments = EnumeratePaymentDates(parameters.Date, parameters.Months)
+                .Select(date => new Payment { Date = date, BodySum = monthPayment, PercentSum = 0, Sum = monthPayment })
+                .ToArray(),
+            Overpayment = overpayment
+        };
+
+        return paymentCollection;
+    }
 
     private static PaymentCollection CalculateDifferentiatedPayments(CreditParameters parameters)
     {

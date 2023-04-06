@@ -197,7 +197,7 @@
         var dataset = new LineDataset<TimePoint>(_paymentCollection.Payments
             .Select(payment => new TimePoint(payment.Date.ToDateTime(TimeOnly.MinValue), (double)payment.Sum)))
         {
-            Label = "Percent payments",
+            Label = "Payments",
             BackgroundColor = ColorUtil.FromDrawingColor(Color.Green),
             BorderColor = ColorUtil.FromDrawingColor(Color.Green),
             Fill = FillingMode.Disabled
