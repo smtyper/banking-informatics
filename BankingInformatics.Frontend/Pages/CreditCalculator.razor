@@ -11,8 +11,6 @@
 @using ChartJs.Blazor.LineChart
 @using ChartJs.Blazor.Util
 @using System.Drawing
-@using System.Text.Json
-@using BankingInformatics.Frontend.Calculators
 @using Blazored.LocalStorage
 
 @inject ILocalStorageService LocalStorageService;
@@ -174,10 +172,10 @@
 
         _lineConfig = GetLineConfig();
         _lineConfig.Data.Datasets.Add(new LineDataset<TimePoint>(Enumerable
-            .Range(0, 10)
+            .Range(0, 1)
             .Select(_ => new TimePoint(DateOnly.MinValue.ToDateTime(TimeOnly.MinValue), 0)))
         {
-            Label = "Percent payments",
+            Label = "Payments",
             BackgroundColor = ColorUtil.FromDrawingColor(Color.Green),
             BorderColor = ColorUtil.FromDrawingColor(Color.Green),
             Fill = FillingMode.Disabled

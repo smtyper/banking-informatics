@@ -157,10 +157,10 @@
 
         _lineConfig = GetLineConfig();
         _lineConfig.Data.Datasets.Add(new LineDataset<TimePoint>(Enumerable
-            .Range(0, 10)
+            .Range(0, 1)
             .Select(_ => new TimePoint(DateOnly.MinValue.ToDateTime(TimeOnly.MinValue), 0)))
         {
-            Label = "Percent payments",
+            Label = "Diposit sums",
             BackgroundColor = ColorUtil.FromDrawingColor(Color.Green),
             BorderColor = ColorUtil.FromDrawingColor(Color.Green),
             Fill = FillingMode.Disabled
@@ -180,7 +180,7 @@
         var dataset = new LineDataset<TimePoint>(_paymentCollection.DepositPayments
             .Select(payment => new TimePoint(payment.Date.ToDateTime(TimeOnly.MinValue), (double)payment.Sum)))
         {
-            Label = "Payments",
+            Label = "Diposit sums",
             BackgroundColor = ColorUtil.FromDrawingColor(Color.Green),
             BorderColor = ColorUtil.FromDrawingColor(Color.Green),
             Fill = FillingMode.Disabled
@@ -230,7 +230,7 @@
             Title = new OptionsTitle
             {
                 Display = true,
-                Text = "Payments graph"
+                Text = "Deposit states graph"
             },
             Scales = new Scales
             {
@@ -249,7 +249,7 @@
                 {
                     new LinearCartesianAxis
                     {
-                        ScaleLabel = new ScaleLabel { LabelString = "Percent payment sums" }
+                        ScaleLabel = new ScaleLabel { LabelString = "Deposit sums" }
                     }
                 }
             }
