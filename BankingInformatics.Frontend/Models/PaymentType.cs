@@ -1,4 +1,4 @@
-﻿namespace BankingInformatics.Frontend.Calculators.Credit;
+﻿namespace BankingInformatics.Frontend.Models;
 
 public enum PaymentType
 {

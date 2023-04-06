@@ -2,7 +2,7 @@
 using BankingInformatics.Frontend.Models.Parameters;
 using DecimalMath;
 
-namespace BankingInformatics.Frontend.Calculators.Credit;
+namespace BankingInformatics.Frontend.Calculators;
 
 public static class CreditCalculator
 {

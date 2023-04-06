@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using BankingInformatics.Frontend.Calculators.Credit;
+using BankingInformatics.Frontend.Calculators;
 
 namespace BankingInformatics.Frontend.Models.Parameters;
 

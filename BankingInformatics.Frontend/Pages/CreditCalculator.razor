@@ -2,7 +2,6 @@
 @inherits Base
 
 @using BankingInformatics.Frontend.Models.Parameters
-@using BankingInformatics.Frontend.Calculators.Credit
 @using BankingInformatics.Frontend.Models
 @using ChartJs.Blazor
 @using ChartJs.Blazor.Common
@@ -13,6 +12,7 @@
 @using ChartJs.Blazor.Util
 @using System.Drawing
 @using System.Text.Json
+@using BankingInformatics.Frontend.Calculators
 @using Blazored.LocalStorage
 
 @inject ILocalStorageService LocalStorageService;
@@ -193,7 +193,7 @@
         _chart!.Update();
         StateHasChanged();
 
-        _paymentCollection = Calculators.Credit.CreditCalculator.CalculatePayments(_creditParameters);
+        _paymentCollection = Calculators.CreditCalculator.CalculatePayments(_creditParameters);
         var dataset = new LineDataset<TimePoint>(_paymentCollection.Payments
             .Select(payment => new TimePoint(payment.Date.ToDateTime(TimeOnly.MinValue), (double)payment.Sum)))
         {
