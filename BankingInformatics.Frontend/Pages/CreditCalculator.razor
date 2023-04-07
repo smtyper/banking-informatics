@@ -83,6 +83,28 @@
         </div>
         
         <div class="col-md-8">
+            @if (_creditParameters.PaymentType is PaymentType.Annuity)
+            {
+                <h2 class="d-flex justify-content-center">Every month payment:</h2>
+                <table class="table">
+                    <thead class="mb-1">
+                    <tr>
+                        <th scope="col">Period</th>
+                        <th scope="col">Month payment sum</th>
+                        <th scope="col">Total overpayment</th>
+                    </tr>
+                    </thead>
+                    @if (_paymentCollection.Payments.Any())
+                    {
+                        <tr class="mb-1">
+                            <td scope="row">@(_creditParameters.Date.ToString("yyyy-MM-dd")) -> @(_creditParameters.Date.AddMonths(_creditParameters.Months).ToString("yyyy-MM-dd"))</td>
+                            <td>@_paymentCollection.Payments.First().Sum</td>
+                            <td>@_paymentCollection.Overpayment</td>
+                        </tr>
+                    }
+                </table>
+            }
+            
             <h2 class="d-flex justify-content-center">Payments:</h2>
             <table class="table">
                 <thead class="mb-1">

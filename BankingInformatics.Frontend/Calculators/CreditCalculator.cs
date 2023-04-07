@@ -24,7 +24,7 @@ public static class CreditCalculator
         var paymentCollection = new PaymentCollection
         {
             Payments = Extensions.EnumeratePaymentDates(parameters.Date, parameters.Months)
-                .Select(date => new Payment { Date = date, BodySum = monthPayment, PercentSum = 0, Sum = monthPayment })
+                .Select(date => new Payment { Date = date, Sum = monthPayment })
                 .ToArray(),
             Overpayment = overpayment
         };
@@ -63,7 +63,7 @@ public static class CreditCalculator
         var paymentCollection = new PaymentCollection
         {
             Payments = payments,
-            Overpayment = payments.Sum(payment => payment.PercentSum)
+            Overpayment = payments.Sum(payment => payment.PercentSum!.Value)
         };
 
         return paymentCollection;
