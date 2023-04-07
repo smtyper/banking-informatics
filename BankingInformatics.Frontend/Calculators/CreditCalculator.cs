@@ -16,7 +16,7 @@ public static class CreditCalculator
     private static PaymentCollection CalculateAnnuityPayments(CreditParameters parameters)
     {
         var monthRate = parameters.Percent / (100 * 12);
-        var periods = (parameters.Months * -1) - 1;
+        var periods = (parameters.Months * -1);
 
         var monthPayment = decimal.Round(parameters.Sum * (monthRate / (1 - DecimalEx.Pow(1 + monthRate, periods))));
         var overpayment = decimal.Round((monthPayment * parameters.Months) - parameters.Sum);
