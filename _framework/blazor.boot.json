@@ -7,7 +7,7 @@
   "linkerEnabled": true,
   "resources": {
     "assembly": {
-      "BankingInformatics.Frontend.dll": "sha256-zADE59ECDFEiU68sPYIdxDHRPjwPf1iD9akYewM75JA=",
+      "BankingInformatics.Frontend.dll": "sha256-tlMBqsQ51\/sKePKdfgU9kQxt7KpV2U\/X+sKGCPtxC9U=",
       "Blazored.LocalStorage.dll": "sha256-eXVgTw72kEn74FZgDQbLtvAmXbiZDSj5gzUnxVmwowQ=",
       "ChartJs.Blazor.dll": "sha256-0ciRJps8EWsbo3zIh4fYA2+QBnZIl1lSu4aydLaQDEo=",
       "DecimalEx.dll": "sha256-CUUYdHJ\/2ef3V3Mdk4mCH3nOoeXx3gCdOOl3wdJmueE=",
